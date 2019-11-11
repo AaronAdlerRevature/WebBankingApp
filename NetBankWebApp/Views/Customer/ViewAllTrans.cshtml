@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "ViewAllTrans";
+}
+
+<h1>ViewAllTrans</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                UserName
+            </th>
+            <th>
+                transferTypeId
+            </th>
+            <th>
+                accId
+            </th>
+            <th>
+                toAccId
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                CreateTime
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.trans)
+        {
+
+            <tr>
+                <td>
+                    @item.id
+                </td>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @{
+                        switch (item.transferTypeId)
+                        {
+                            case 0:
+                                <span>Create</span>
+                                break;
+                            case 1:
+                                <span>Deposit</span>
+                                break;
+                            case 2:
+                                <span>Withdraw</span>
+                                break;
+                            case 3:
+                <span>Transfer</span>
+                                        break;
+                            case 4:
+                <span>Fee</span>
+                                        break;
+                            case 5:
+                <span>Close</span>
+                                        break;
+                        }
+                    }
+
+
+                </td>
+                <td>
+                    @item.accId
+                </td>
+                <td>
+                    @item.toAccId
+                </td>
+                <td>
+                    @item.Amount
+                </td>
+                <td>
+                    @item.CreateTime
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

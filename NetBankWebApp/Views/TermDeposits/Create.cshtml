@@ -1,0 +1,39 @@
+﻿@model NetBankWebApp.Models.Models.TermDeposit
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Create";
+    var AccId = ViewData["count"];
+}
+
+<h1>Take out a loan</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" value="0" />
+            <input type="hidden" asp-for="UserName" value="@UserManager.GetUserName(User)" />
+            <input type="hidden" asp-for="accId" value="@AccId" />
+            <input type="hidden" asp-for="InterestRate" value=".001" />
+            <p>Please enter the amount for your term deposit.</p>
+            <div class="form-group">
+                <label asp-for="Balance" class="control-label">Term Deposit Amount</label>
+                <input asp-for="Balance" class="form-control" />
+                <span asp-validation-for="Balance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

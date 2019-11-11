@@ -1,0 +1,30 @@
+﻿@model NetBankWebApp.Models.Models.Transfer
+
+@using NetBankWebApp.Models.Models
+@{
+    ViewData["Title"] = "Transfer";
+}
+<h1>Currently transfering from: @Model.fromAccId</h1>
+<h2>Select an Account to Transfer to:</h2>
+<form asp-action="Transfer">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="fromId" value="@Model.fromId" />
+    <input type="hidden" asp-for="fromAccId" value="@Model.fromAccId" />
+    <div class="form-group">
+        <label asp-for="toId" class="control-label"></label>
+        <select asp-for="toId" class="form-control" asp-items="ViewBag.toAcc">
+        </select>
+        <span asp-validation-for="toId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Amount" class="control-label"></label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <input type="submit" value="Transfer" class="btn btn-primary" />
+    </div>
+    <a asp-action="Index">Back to List</a>
+</form>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetBankWebApp.Models\NetBankWebApp.Models.csproj" />
+    <ProjectReference Include="..\NetBankWebApp\NetBankWebApp.csproj" />
+  </ItemGroup>
+
+</Project>

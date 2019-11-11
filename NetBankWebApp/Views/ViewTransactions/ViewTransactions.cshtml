@@ -1,0 +1,104 @@
+﻿
+
+@{
+    ViewData["Title"] = "ViewTransactions";
+}
+<h1>List of Transactions</h1>
+@using (Html.BeginForm("ViewTransactions"))
+{
+    <div>
+        <form action="">
+            <label>Start Time:</label>
+            <input type="datetime-local" name="start" />
+            <label>End Time:</label>
+            <input type="datetime-local" name="end" />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+}
+
+<div>
+    <a asp-action="ViewTransactions10" asp-route-id="@ViewBag.id">View Last 10</a> |
+    <a asp-action="ViewTransactions" asp-route-id="@ViewBag.id">View All</a> | 
+    <a asp-action="Index">Return to Index</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                transferTypeId
+            </th>
+            <th>
+                typeName
+            </th>
+            <th>
+                accId
+            </th>
+            <th>
+                toAccId
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                CreateTime
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.VM)
+        {
+            switch (item.transferTypeId)
+            {
+                case 0:
+                    item.typeName = "Create";
+                    break;
+                case 1:
+                    item.typeName = "Deposit";
+                    break;
+                case 2:
+                    item.typeName = "Withdraw";
+                    break;
+                case 3:
+                    item.typeName = "Transfer";
+                    break;
+                case 4:
+                    item.typeName = "Fee";
+                    break;
+                case 5:
+                    item.typeName = "Close";
+                    break;
+            }
+            <tr>
+                <td>
+                    @item.id
+                </td>
+                <td>
+                    @item.transferTypeId
+                </td>
+                <td>
+                    @item.typeName
+                </td>
+                <td>
+                    @item.accId
+                </td>
+                <td>
+                    @item.toAccId
+                </td>
+                <td>
+                    @item.Amount
+                </td>
+                <td>
+                    @item.CreateTime
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -1,0 +1,39 @@
+﻿@model NetBankWebApp.Models.Models.TransferableAccount
+
+@{
+    ViewData["Title"] = "Deposit";
+}
+
+<h1>Deposit</h1>
+
+<h4>CheckingAccount</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Deposit">
+            <input type="hidden" asp-for="id" />
+            <input type="hidden" asp-for="accId" />
+            <input type="hidden" asp-for="UserName" />
+            <input type="hidden" asp-for="Balance" />
+            <input type="hidden" asp-for="InterestRate" />
+            <input type="hidden" asp-for="CanOverdraft" />
+
+            <h2><b>Account Id:</b> @Model.accId</h2>
+            <h3><b>Balance:</b> $@Model.Balance</h3>
+            <div class="form-group">
+                <label asp-for="ToTransfer" class="control-label">Deposit Ammount</label>
+                <input asp-for="ToTransfer" class="form-control" />
+                <span asp-validation-for="ToTransfer" class="text-danger"></span>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+        </form>
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
