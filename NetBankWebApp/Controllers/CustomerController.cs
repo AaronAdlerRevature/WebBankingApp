@@ -158,5 +158,13 @@ namespace NetBankWebApp.Controllers
         {
             return _context.Customer.Any(e => e.Username == Username);
         }
+
+        public async Task<IActionResult> ViewAllTrans()
+        {
+            ViewBag.trans = _context.Transaction.Where(x => x.UserName == User.Identity.Name);
+
+            return View();
+        }
+
     }
 }

@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Pay";
+}
+
+<h1>Pay Loan</h1>
+
+<hr />
+<div class="row">
+    <h3>*Note: Payment in excess of owed amount will not be collected. Loan will be payed off.</h3>
+    <h2>Loan @ViewBag.accId | Balance: $@ViewBag.Balance</h2><br />
+</div>
+<div>
+    @using (Html.BeginForm("Pay","LoanModels"))
+    {
+        <div>
+            <form action="">
+                <div>
+                    <input type="hidden" name="id" value="@ViewBag.id" />
+                    <label>Pay from account:</label>
+                    <select name="fromId">
+                        @foreach (var item in ViewBag.fromAccounts)
+                        {
+                            <option value="@item.id">@item.accId | Balance: $@item.Balance</option>
+                        }
+                    </select>
+                    <label>Amount: $</label>
+                    <input type="number" name="Amount" />
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    }
+
+</div>
+<div>
+    <div>
+        <br />@Html.ActionLink("Back to List","Index","LoanModels")
+    </div>
+</div>

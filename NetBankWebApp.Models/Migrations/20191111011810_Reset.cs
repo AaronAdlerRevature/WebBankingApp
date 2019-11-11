@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NetBankWebApp.Models.Migrations
 {
-    public partial class TestCheckingFK : Migration
+    public partial class Reset : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -75,6 +75,75 @@ namespace NetBankWebApp.Models.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CustomerDetails", x => x.Username);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Loan",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(nullable: false),
+                    accId = table.Column<string>(nullable: false),
+                    InterestRate = table.Column<decimal>(type: "decimal(20,20)", nullable: false),
+                    Balance = table.Column<decimal>(type: "decimal(20,2)", nullable: false),
+                    toPay = table.Column<decimal>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Loan", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TermDeposit",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(nullable: false),
+                    accId = table.Column<string>(nullable: false),
+                    InterestRate = table.Column<decimal>(type: "decimal(20,20)", nullable: false),
+                    Balance = table.Column<decimal>(type: "decimal(20,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TermDeposit", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transaction",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(nullable: true),
+                    transferTypeId = table.Column<int>(nullable: false),
+                    accId = table.Column<string>(nullable: false),
+                    toAccId = table.Column<string>(nullable: true),
+                    Amount = table.Column<decimal>(type: "decimal(20,2)", nullable: false),
+                    CreateTime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transaction", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transferable",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(nullable: false),
+                    accId = table.Column<string>(nullable: false),
+                    InterestRate = table.Column<decimal>(type: "decimal(20,20)", nullable: false),
+                    Balance = table.Column<decimal>(type: "decimal(20,2)", nullable: false),
+                    CanOverdraft = table.Column<bool>(nullable: false),
+                    ToTransfer = table.Column<decimal>(type: "decimal(20,2)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transferable", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,26 +252,6 @@ namespace NetBankWebApp.Models.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Checking",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    accId = table.Column<string>(nullable: true),
-                    UserNameId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Checking", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Checking_AspNetUsers_UserNameId",
-                        column: x => x.UserNameId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -241,11 +290,6 @@ namespace NetBankWebApp.Models.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Checking_UserNameId",
-                table: "Checking",
-                column: "UserNameId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -266,13 +310,22 @@ namespace NetBankWebApp.Models.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Checking");
-
-            migrationBuilder.DropTable(
                 name: "Customer");
 
             migrationBuilder.DropTable(
                 name: "CustomerDetails");
+
+            migrationBuilder.DropTable(
+                name: "Loan");
+
+            migrationBuilder.DropTable(
+                name: "TermDeposit");
+
+            migrationBuilder.DropTable(
+                name: "Transaction");
+
+            migrationBuilder.DropTable(
+                name: "Transferable");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -5,19 +5,20 @@
 @inject UserManager<IdentityUser> UserManager
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Customer Profile";
     var userName = UserManager.GetUserName(User);
 }
 
-<h1>Index</h1>
+    <h1>Customer Profile</h1>
 
 <p>
     @{
         
         if (Model.Count() == 0)
         {
-            <a asp-action="Create">Create New</a>
+            <a asp-action="Create">Create New | </a>
         }
+        <a asp-controller="CustomerDetails" asp-action="Index">Address Details</a>
     }
 
 </p>
@@ -70,7 +71,6 @@
                         @*<a asp-action="Details" asp-route-username ="@item.Username">Details</a> |*@
                         @Html.ActionLink("Details", "Details", new { username = item.Username }) |
                         @*<a asp-action="Delete" asp-route-id="@item.Username">Delete</a>*@
-                        @Html.ActionLink("Delete", "Delete", new { username = item.Username })
 
                     </td>
                 </tr>

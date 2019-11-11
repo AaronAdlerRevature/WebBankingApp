@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBankWebApp", "NetBankWebApp\NetBankWebApp.csproj", "{A4279D4A-135F-49C2-837A-18E81AA58688}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetBankWebApp", "NetBankWebApp\NetBankWebApp.csproj", "{A4279D4A-135F-49C2-837A-18E81AA58688}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBankWebApp.Models", "NetBankWebApp.Models\NetBankWebApp.Models.csproj", "{A3E18DF3-5C04-4DC5-B6C4-6D9FA6ED0D4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetBankWebApp.Models", "NetBankWebApp.Models\NetBankWebApp.Models.csproj", "{A3E18DF3-5C04-4DC5-B6C4-6D9FA6ED0D4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetBankWebApp.BusinessLayer", "NetBankWebApp.BusinessLayer\NetBankWebApp.BusinessLayer.csproj", "{D4D420F0-3AE6-4E48-AAAF-CFD5C379B4AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A3E18DF3-5C04-4DC5-B6C4-6D9FA6ED0D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E18DF3-5C04-4DC5-B6C4-6D9FA6ED0D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E18DF3-5C04-4DC5-B6C4-6D9FA6ED0D4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4D420F0-3AE6-4E48-AAAF-CFD5C379B4AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4D420F0-3AE6-4E48-AAAF-CFD5C379B4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4D420F0-3AE6-4E48-AAAF-CFD5C379B4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4D420F0-3AE6-4E48-AAAF-CFD5C379B4AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

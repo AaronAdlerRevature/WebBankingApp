@@ -10,8 +10,8 @@ using NetBankWebApp.Models.Models;
 namespace NetBankWebApp.Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191105204807_TestCheckingFK")]
-    partial class TestCheckingFK
+    [Migration("20191111011810_Reset")]
+    partial class Reset
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -276,24 +276,122 @@ namespace NetBankWebApp.Models.Migrations
                     b.ToTable("Customer");
                 });
 
-            modelBuilder.Entity("NetBankWebApp.Models.Models.CheckingAccount", b =>
+            modelBuilder.Entity("NetBankWebApp.Models.Models.LoanModel", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("UserNameId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(20,2)");
+
+                    b.Property<decimal>("InterestRate")
+                        .HasColumnType("decimal(20,20)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("accId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("toPay")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Loan");
+                });
+
+            modelBuilder.Entity("NetBankWebApp.Models.Models.TermDeposit", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(20,2)");
+
+                    b.Property<decimal>("InterestRate")
+                        .HasColumnType("decimal(20,20)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("accId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
-                    b.HasIndex("UserNameId");
+                    b.ToTable("TermDeposit");
+                });
 
-                    b.ToTable("Checking");
+            modelBuilder.Entity("NetBankWebApp.Models.Models.TransactionModel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(20,2)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("accId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("toAccId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("transferTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Transaction");
+                });
+
+            modelBuilder.Entity("NetBankWebApp.Models.Models.TransferableAccount", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(20,2)");
+
+                    b.Property<bool>("CanOverdraft")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("InterestRate")
+                        .HasColumnType("decimal(20,20)");
+
+                    b.Property<decimal?>("ToTransfer")
+                        .HasColumnType("decimal(20,2)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("accId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Transferable");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -345,13 +443,6 @@ namespace NetBankWebApp.Models.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("NetBankWebApp.Models.Models.CheckingAccount", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "UserName")
-                        .WithMany()
-                        .HasForeignKey("UserNameId");
                 });
 #pragma warning restore 612, 618
         }

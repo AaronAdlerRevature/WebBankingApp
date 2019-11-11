@@ -1,0 +1,73 @@
+﻿@model IEnumerable<NetBankWebApp.Models.Models.TransferableAccount>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.accId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterestRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    @if (item.UserName == User.Identity.Name) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.accId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @{
+                    if (item.accId[0] == 'c')
+                    {
+                        @Html.DisplayFor(modelItem => item.InterestRate);
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.InterestRate) <span>on Overdraft</span>
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Balance)
+            </td>
+            <td>
+                <a asp-action="Deposit" asp-route-id="@item.id">Deposit</a> |
+                <a asp-action="Withdraw" asp-route-id="@item.id">Withdraw</a> |
+                <a asp-action="Transfer" asp-route-id="@item.id">Transfer</a> |
+                <a asp-action="ViewTransactions" asp-route-id="@item.id">View Transactions</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a>
+                @{
+                    if (item.Balance == 0)
+                    {
+                        <span> | <a asp-action="Delete" asp-route-id="@item.id">Close</a></span>
+                    }
+                }
+
+            </td>
+        </tr>}
+        
+}
+    </tbody>
+</table>

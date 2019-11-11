@@ -27,6 +27,9 @@ namespace NetBankWebApp.Models.Models
         }
         public DbSet<CustomerModel> Customer { get; set; }
         public DbSet<CustomerDetailsModel> CustomerDetails { get; set; }
-        public DbSet<CheckingAccount> Checking { get; set; }
+        public DbSet<TransactionModel> Transaction { get; set; }
+        public DbSet<TransferableAccount> Transferable { get; set; }
+        public DbSet<LoanModel> Loan { get; set; }
+        public DbSet<TermDeposit> TermDeposit { get; set; }
     }
 }
